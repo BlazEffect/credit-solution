@@ -1,4 +1,6 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DECIMAL
+from datetime import datetime
+
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DECIMAL, Sequence, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -21,3 +23,13 @@ class Credits(Base):
     sum = Column(DECIMAL)
     percentage = Column(DECIMAL)
     user_id = Column(Integer, ForeignKey("users.id"))
+
+
+class Token(Base):
+    __tablename__ = 'tokens'
+
+    id = Column(Integer, primary_key=True, index=True)
+    access_token = Column(String, unique=True, index=True)
+    refresh_token = Column(String, unique=True, index=True)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    created_at = Column(DateTime, default=datetime.utcnow)
