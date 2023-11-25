@@ -24,7 +24,7 @@
     align-items: center;
 }
 
-input {
+.input_password, .input_login {
     border-radius: 4px;
     border: 1px solid #BFBFBF;
     background: #FFF;
